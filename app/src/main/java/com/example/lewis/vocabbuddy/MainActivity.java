@@ -1,5 +1,7 @@
 package com.example.lewis.vocabbuddy;
 
+import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +22,5 @@ public class MainActivity extends AppCompatActivity {
         recordTextView = (TextView) findViewById(R.id.record_textview);
     }
 
-    public void changeText(View view) {
-        recordTextView.setText("Record button pressed successfully");
-    }
+
 }

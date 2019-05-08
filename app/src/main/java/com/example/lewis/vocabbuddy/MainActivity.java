@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button recordButton;
+    //Button recordButton;
     TextView recordTextView;
     public static final int SPEECH_REQUEST = 10;
     public static final String EXTRA_SPEECH = "com.example.lewis.vocabbuddy.SPEECH";
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recordButton = (Button) findViewById(R.id.record_button);
+        //recordButton = (Button) findViewById(R.id.record_button);
         recordTextView = (TextView) findViewById(R.id.record_textview);
     }
 

@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button recordButton;
     TextView recordTextView;
     public static final int SPEECH_REQUEST = 10;
+    public static final String EXTRA_SPEECH = "com.example.lewis.vocabbuddy.SPEECH";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,11 @@ public class MainActivity extends AppCompatActivity {
             case SPEECH_REQUEST:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    recordTextView.setText(result.get(0));
+                    String spokenWords = result.get(0);
+                    recordTextView.setText(spokenWords);
 
                     Intent startListVocabIntent = new Intent(this, ListVocabActivity.class);
+                    startListVocabIntent.putExtra(EXTRA_SPEECH, spokenWords);
                     startActivity(startListVocabIntent);
                 }
                 break;

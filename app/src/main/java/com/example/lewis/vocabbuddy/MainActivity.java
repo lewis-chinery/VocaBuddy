@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     recordTextView.setText(result.get(0));
+
+                    Intent startListVocabIntent = new Intent(this, ListVocabActivity.class);
+                    startActivity(startListVocabIntent);
                 }
                 break;
         }

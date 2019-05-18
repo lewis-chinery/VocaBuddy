@@ -17,4 +17,11 @@ public class Vocab {
         return HashMapWithZeroValues;
     }
 
+    public HashMap<String, Integer> incrementHashMapValues (HashMap<String, Integer> zeroMap, String[] spokenArray) {
+        for (String word : spokenArray) {
+            zeroMap.put(word, zeroMap.get(word) + 1);
+        }
+        return zeroMap;
+    }
+
 }

@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class ListVocabActivity extends AppCompatActivity {
 
     // Android tutorial for starting another Activity:
@@ -18,7 +21,9 @@ public class ListVocabActivity extends AppCompatActivity {
 
         Intent startListVocabIntent = getIntent();
         String spokenWords = startListVocabIntent.getStringExtra(MainActivity.EXTRA_SPEECH);
+        String[] spokenArray = Vocab.convertTextToArray(spokenWords);
+
         vocabTextView = (TextView) findViewById(R.id.vocab_textview);
-        vocabTextView.setText(spokenWords);
+        vocabTextView.setText(Arrays.toString(spokenArray));
     }
 }

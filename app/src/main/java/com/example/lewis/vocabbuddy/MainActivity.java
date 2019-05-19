@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //recordButton = (Button) findViewById(R.id.record_button);
         recordTextView = (TextView) findViewById(R.id.record_textview);
     }
 
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String spokenWords = result.get(0);
-                    recordTextView.setText(spokenWords);
 
                     Intent startListVocabIntent = new Intent(this, ListVocabActivity.class);
                     startListVocabIntent.putExtra(EXTRA_SPEECH, spokenWords);

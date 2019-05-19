@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class ListVocabActivity extends AppCompatActivity {
 
@@ -21,9 +22,18 @@ public class ListVocabActivity extends AppCompatActivity {
 
         Intent startListVocabIntent = getIntent();
         String spokenWords = startListVocabIntent.getStringExtra(MainActivity.EXTRA_SPEECH);
+
         String[] spokenArray = Vocab.convertTextToArray(spokenWords);
+        HashMap<String, Integer> zeroValueSpokenHashMap = Vocab.populateHashMapWithWords(spokenArray);
+        HashMap<String, Integer> nonZeroSpokenHashMap = Vocab.incrementHashMapValues(zeroValueSpokenHashMap, spokenArray);
+
+        String mapAsString= "";
+        for (String word: nonZeroSpokenHashMap.keySet()) {
+            mapAsString += word + " - " + nonZeroSpokenHashMap.get(word) + "\n";
+        }
 
         vocabTextView = (TextView) findViewById(R.id.vocab_textview);
-        vocabTextView.setText(Arrays.toString(spokenArray));
+        vocabTextView.setText(mapAsString);
+        //vocabTextView.setText(Arrays.toString(spokenArray));
     }
 }

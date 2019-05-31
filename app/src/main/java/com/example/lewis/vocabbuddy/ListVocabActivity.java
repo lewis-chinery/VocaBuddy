@@ -31,8 +31,6 @@ public class ListVocabActivity extends AppCompatActivity {
         String[] spokenArray = Vocab.convertTextToArray(spokenWords);
         HashMap<String, Integer> zeroValueSpokenHashMap = Vocab.populateHashMapWithWords(spokenArray);
         final HashMap<String, Integer> nonZeroSpokenHashMap = Vocab.incrementHashMapValues(zeroValueSpokenHashMap, spokenArray);
-        ArrayList<String> vocabArray = Vocab.getVocabArray(nonZeroSpokenHashMap);
-        ArrayList<String> freqArray = Vocab.getFreqArray(nonZeroSpokenHashMap);
 
         class CustomAdapter extends BaseAdapter {
 
@@ -71,13 +69,5 @@ public class ListVocabActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.vocab_listview);
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
-
-        String mapAsString= "";
-        for (int i = 0; i < vocabArray.size(); i++) {
-            mapAsString += vocabArray.get(i) + " - " + freqArray.get(i) + "\n";
-        }
-
-        vocabTextView = (TextView) findViewById(R.id.vocab_textview);
-        vocabTextView.setText(mapAsString);
     }
 }

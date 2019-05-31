@@ -3,6 +3,9 @@ package com.example.lewis.vocabbuddy;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -26,7 +29,7 @@ public class ListVocabActivity extends AppCompatActivity {
 
         String[] spokenArray = Vocab.convertTextToArray(spokenWords);
         HashMap<String, Integer> zeroValueSpokenHashMap = Vocab.populateHashMapWithWords(spokenArray);
-        HashMap<String, Integer> nonZeroSpokenHashMap = Vocab.incrementHashMapValues(zeroValueSpokenHashMap, spokenArray);
+        final HashMap<String, Integer> nonZeroSpokenHashMap = Vocab.incrementHashMapValues(zeroValueSpokenHashMap, spokenArray);
         ArrayList<String> vocabArray = Vocab.getVocabArray(nonZeroSpokenHashMap);
         ArrayList<String> freqArray = Vocab.getFreqArray(nonZeroSpokenHashMap);
 
@@ -37,6 +40,5 @@ public class ListVocabActivity extends AppCompatActivity {
 
         vocabTextView = (TextView) findViewById(R.id.vocab_textview);
         vocabTextView.setText(mapAsString);
-        //vocabTextView.setText(Arrays.toString(spokenArray));
     }
 }

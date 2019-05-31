@@ -15,7 +15,6 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Button recordButton;
     TextView recordTextView;
     public static final int SPEECH_REQUEST = 10;
     public static final String EXTRA_SPEECH = "com.example.lewis.vocabbuddy.SPEECH";

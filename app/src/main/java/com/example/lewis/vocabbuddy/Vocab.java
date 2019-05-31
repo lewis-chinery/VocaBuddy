@@ -1,6 +1,8 @@
 package com.example.lewis.vocabbuddy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Vocab {
 
@@ -22,6 +24,22 @@ public class Vocab {
             zeroMap.put(word, zeroMap.get(word) + 1);
         }
         return zeroMap;
+    }
+
+    public static ArrayList<String> getVocabArray (HashMap<String, Integer> inputMap) {
+        ArrayList<String> outputVocabArray = new ArrayList<String>();
+        for (String keyWord: inputMap.keySet()) {
+            outputVocabArray.add(keyWord);
+        }
+        return outputVocabArray;
+    }
+
+    public static ArrayList<String> getFreqArray (HashMap<String, Integer> inputMap) {
+        ArrayList<String> outputFreqArray = new ArrayList<String>();
+        for (String keyWord: inputMap.keySet()) {
+            outputFreqArray.add(String.valueOf(inputMap.get(keyWord)));
+        }
+        return outputFreqArray;
     }
 
 }

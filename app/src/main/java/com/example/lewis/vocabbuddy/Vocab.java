@@ -31,7 +31,21 @@ public class Vocab {
         return zeroMap;
     }
 
-    public static ArrayList<String> getVocabArray (HashMap<String, Integer> inputMap) {
+    public static Map<String, Integer> orderHashMap (HashMap<String, Integer> inputMap) {
+        Map<String, Integer> sortedAlphabetically = inputMap
+                .entrySet()
+                .stream()
+                .sorted(comparingByKey())
+                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
+        Map<String, Integer> sortedValues = sortedAlphabetically
+                .entrySet()
+                .stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
+        return sortedValues;
+    }
+
+    public static ArrayList<String> getVocabArray (Map<String, Integer> inputMap) {
         ArrayList<String> outputVocabArray = new ArrayList<String>();
         for (String keyWord: inputMap.keySet()) {
             outputVocabArray.add(keyWord);
@@ -39,7 +53,7 @@ public class Vocab {
         return outputVocabArray;
     }
 
-    public static ArrayList<String> getFreqArray (HashMap<String, Integer> inputMap) {
+    public static ArrayList<String> getFreqArray (Map<String, Integer> inputMap) {
         ArrayList<String> outputFreqArray = new ArrayList<String>();
         for (String keyWord: inputMap.keySet()) {
             outputFreqArray.add(String.valueOf(inputMap.get(keyWord)));

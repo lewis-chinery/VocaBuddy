@@ -13,6 +13,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ListVocabActivity extends AppCompatActivity {
 
@@ -30,12 +31,13 @@ public class ListVocabActivity extends AppCompatActivity {
 
         String[] spokenArray = Vocab.convertTextToArray(spokenWords);
         HashMap<String, Integer> zeroValueSpokenHashMap = Vocab.populateHashMapWithWords(spokenArray);
-        final HashMap<String, Integer> nonZeroSpokenHashMap = Vocab.incrementHashMapValues(zeroValueSpokenHashMap, spokenArray);
+        HashMap<String, Integer> nonZeroSpokenHashMap = Vocab.incrementHashMapValues(zeroValueSpokenHashMap, spokenArray);
+        Map<String, Integer> sortedVocab = Vocab.orderHashMap(nonZeroSpokenHashMap);
 
         class CustomAdapter extends BaseAdapter {
 
-            ArrayList<String> outputVocabArray = Vocab.getVocabArray(nonZeroSpokenHashMap);
-            ArrayList<String> outputFreqArray = Vocab.getFreqArray(nonZeroSpokenHashMap);
+            ArrayList<String> outputVocabArray = Vocab.getVocabArray(sortedVocab);
+            ArrayList<String> outputFreqArray = Vocab.getFreqArray(sortedVocab);
 
             @Override
             public int getCount() {

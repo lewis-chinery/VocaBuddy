@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -26,10 +27,12 @@ public class ListVocabActivity extends AppCompatActivity {
         String[] spokenArray = Vocab.convertTextToArray(spokenWords);
         HashMap<String, Integer> zeroValueSpokenHashMap = Vocab.populateHashMapWithWords(spokenArray);
         HashMap<String, Integer> nonZeroSpokenHashMap = Vocab.incrementHashMapValues(zeroValueSpokenHashMap, spokenArray);
+        ArrayList<String> vocabArray = Vocab.getVocabArray(nonZeroSpokenHashMap);
+        ArrayList<String> freqArray = Vocab.getFreqArray(nonZeroSpokenHashMap);
 
         String mapAsString= "";
-        for (String word: nonZeroSpokenHashMap.keySet()) {
-            mapAsString += word + " - " + nonZeroSpokenHashMap.get(word) + "\n";
+        for (int i = 0; i < vocabArray.size(); i++) {
+            mapAsString += vocabArray.get(i) + " - " + freqArray.get(i) + "\n";
         }
 
         vocabTextView = (TextView) findViewById(R.id.vocab_textview);

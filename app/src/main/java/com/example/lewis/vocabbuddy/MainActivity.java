@@ -1,5 +1,6 @@
 package com.example.lewis.vocabbuddy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 

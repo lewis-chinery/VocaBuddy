@@ -16,6 +16,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     TextView recordTextView;
+    Button openVocabListButton;
     public static final int SPEECH_REQUEST = 10;
     public static final String EXTRA_SPEECH = "com.example.lewis.vocabbuddy.SPEECH";
 
@@ -25,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recordTextView = (TextView) findViewById(R.id.record_textview);
+        openVocabListButton = (Button) findViewById(R.id.open_vocab_list_button);
+
+        openVocabListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openVocabList();
+            }
+        });
     }
 
     // Code learned from: https://www.youtube.com/watch?v=0bLwXw5aFOs
@@ -38,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Your device does not support speech input", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void openVocabList() {
+        String spokenWords = null;
+        Intent startListVocabIntent = new Intent(this, ListVocabActivity.class);
+        startListVocabIntent.putExtra(EXTRA_SPEECH, spokenWords);
+        startActivity(startListVocabIntent);
     }
 
     // Code learned from: https://www.youtube.com/watch?v=0bLwXw5aFOs

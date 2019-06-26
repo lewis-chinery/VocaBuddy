@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,7 +43,6 @@ public class ListVocabActivity extends AppCompatActivity {
                 FileInputStream fileInputStream = new FileInputStream(this.getFilesDir()+"/myfile");
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 Map myNewlyReadHashMap = (Map)objectInputStream.readObject();
-
 
                 class CustomAdapter extends BaseAdapter {
 
@@ -81,21 +81,37 @@ public class ListVocabActivity extends AppCompatActivity {
                 ListView listView = (ListView) findViewById(R.id.vocab_listview);
                 CustomAdapter customAdapter = new CustomAdapter();
                 listView.setAdapter(customAdapter);
-
-
-            }
-            catch(ClassNotFoundException | IOException | ClassCastException e) {
+            } catch(ClassNotFoundException | IOException | ClassCastException e) {
                 e.printStackTrace();
             }
         }
 
 
         if (spokenWords != null) {
+
             String[] spokenArray = Vocab.convertTextToArray(spokenWords);
             HashMap<String, Integer> zeroValueSpokenHashMap = Vocab.populateHashMapWithWords(spokenArray);
+
+            try {
+                FileInputStream fileInputStream = new FileInputStream(this.getFilesDir() + "/myfile");
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                Map myNewlyReadHashMap = (Map) objectInputStream.readObject();
+
+                for (String keyWord: zeroValueSpokenHashMap.keySet()) {
+                    if (myNewlyReadHashMap.containsKey(keyWord)) {
+                        continue;
+                    } else {
+                        myNewlyReadHashMap.put(keyWord, 0);
+                    }
+                }
+                zeroValueSpokenHashMap = (HashMap<String, Integer>) myNewlyReadHashMap;
+
+            } catch(ClassNotFoundException | IOException | ClassCastException e) {
+                e.printStackTrace();
+            }
+
             HashMap<String, Integer> nonZeroSpokenHashMap = Vocab.incrementHashMapValues(zeroValueSpokenHashMap, spokenArray);
             Map<String, Integer> sortedVocab = Vocab.orderHashMap(nonZeroSpokenHashMap);
-
 
             try
             {
@@ -106,7 +122,6 @@ public class ListVocabActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
             class CustomAdapter extends BaseAdapter {
 
